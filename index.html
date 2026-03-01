@@ -3,28 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLMMRH HAI Deciphering Suite - Ultimate</title>
+    <title>CLMMRH HAI Deciphering Suite</title>
     <style>
-        :root { --clmmrh-green: #008542; --clmmrh-blue: #0038a8; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
-        .header { background: var(--clmmrh-blue); color: white; padding: 15px; border-radius: 10px 10px 0 0; text-align: center; border-bottom: 4px solid var(--clmmrh-green); }
-        .card { background: white; padding: 20px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .tabs { display: flex; overflow-x: auto; background: #eee; padding: 5px; gap: 5px; }
-        .tab-btn { padding: 10px 20px; border: none; background: #ddd; cursor: pointer; font-weight: bold; border-radius: 5px; white-space: nowrap; }
-        .tab-btn.active { background: var(--clmmrh-blue); color: white; }
-        .module-group { border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; margin-top: 10px; background: #fafafa; }
-        label { display: block; font-weight: 600; margin-top: 12px; font-size: 0.85rem; color: #333; }
+        :root { --clmmrh-green: #008542; --clmmrh-blue: #0038a8; --bg: #f0f4f7; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 15px; }
+        .header { background: var(--clmmrh-blue); color: white; padding: 20px; border-radius: 12px 12px 0 0; border-bottom: 5px solid var(--clmmrh-green); text-align: center; }
+        .card { background: white; padding: 1.5rem; border-radius: 0 0 12px 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
+        .tabs { display: flex; gap: 5px; background: #ddd; padding: 5px 5px 0 5px; overflow-x: auto; }
+        .tab-btn { padding: 10px 15px; border: none; background: #ccc; cursor: pointer; font-weight: bold; border-radius: 5px 5px 0 0; white-space: nowrap; }
+        .tab-btn.active { background: white; color: var(--clmmrh-blue); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        label { display: block; font-weight: 600; margin-top: 10px; font-size: 0.85rem; }
         select, input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-top: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; background: var(--clmmrh-green); color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 20px; font-size: 1rem; }
-        .result-box { margin-top: 20px; padding: 15px; border-radius: 8px; display: none; border: 2px solid; line-height: 1.6; }
-        .hai-pos { background: #fff5f5; border-color: #c53030; color: #9b2c2c; }
-        .hai-neg { background: #f0fff4; border-color: #38a169; color: #22543d; }
-        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; font-size: 0.8rem; }
-        .dash-item { background: #eee; padding: 8px; border-radius: 4px; border-left: 3px solid var(--clmmrh-blue); }
+        button { width: 100%; padding: 12px; background: var(--clmmrh-green); color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .result-box { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; border: 2px solid; }
+        .hai-pos { background: #fff0f0; border-color: #d9534f; color: #a94442; }
+        .hai-neg { background: #f0fff0; border-color: #5cb85c; color: #3c763d; }
         .hidden { display: none; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin-top: 10px; }
-        th, td { padding: 8px; border: 1px solid #eee; text-align: left; }
-        @media print { .tabs, button, label, select, input, .header { display: none !important; } .result-box { display: block !important; border: 1px solid #000; } }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; }
+        th, td { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
     </style>
 </head>
 <body>
@@ -32,75 +29,93 @@
 <div class="container">
     <div class="header">
         <h2 style="margin:0">CLMMRH IPC</h2>
-        <p style="margin:0; font-size: 0.8rem;">Advanced HAI Classification Suite (2026)</p>
+        <p style="margin:0; font-size: 0.8rem;">V2026.4 - CLABSI | CAUTI | SSI | VAE</p>
     </div>
 
     <div class="tabs">
         <button class="tab-btn active" onclick="showTab('engine')">Decipher Engine</button>
-        <button class="tab-btn" onclick="showTab('history')">Case Log & Summary</button>
-        <button class="tab-btn" onclick="showTab('refs')">Manual</button>
+        <button class="tab-btn" onclick="showTab('history')">Case Log</button>
+        <button class="tab-btn" onclick="showTab('docs')">VAE Reference</button>
     </div>
 
     <div id="tab-engine" class="tab-content">
         <div class="card">
-            <label>Patient ID / Room</label>
-            <input type="text" id="ptId" placeholder="Room-Bed">
+            <div class="grid">
+                <div>
+                    <label>Patient ID / Room</label>
+                    <input type="text" id="ptId" placeholder="Room/Bed">
+                </div>
+                <div>
+                    <label>Module</label>
+                    <select id="module" onchange="updateUI()">
+                        <option value="BSI">CLABSI</option>
+                        <option value="UTI">CAUTI</option>
+                        <option value="SSI">SSI</option>
+                        <option value="VAE">VAE (Ventilator)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="bsiControls" class="module-group">...</div>
+             <div id="utiControls" class="module-group hidden">...</div>
+             <div id="ssiControls" class="module-group hidden">...</div>
+
+            <div id="vaeControls" class="module-group hidden">
+                <label>Oxygenation Baseline (FiO2 or PEEP)</label>
+                <select id="vaeParam">
+                    <option value="fio2">FiO2 (Fraction of Inspired Oxygen)</option>
+                    <option value="peep">PEEP (Positive End-Expiratory Pressure)</option>
+                </select>
+                <label>Was there a stable/decreasing trend for ≥2 days?</label>
+                <select id="vaeStable"><option value="yes">Yes</option><option value="no">No</option></select>
+                <label>Increase sustained for ≥2 days?</label>
+                <select id="vaeSustained"><option value="yes">Yes</option><option value="no">No</option></select>
+                <label>Increase Magnitude:</label>
+                <select id="vaeMag">
+                    <option value="yes">FiO2 ≥0.20 (20 points) OR PEEP ≥3 cmH2O</option>
+                    <option value="no">Lower than criteria</option>
+                </select>
+            </div>
+
+            <button onclick="calculate()">Analyze Case</button>
+            <div id="result" class="result-box"></div>
+        </div>
+    </div>
+
+    <div id="tab-docs" class="tab-content hidden">
+        <div class="card">
+            <h3>VAE Definition (CDC 2026)</h3>
+            <p><strong>VAC (Ventilator-Associated Condition):</strong> A patient has a baseline period of stability or improvement (≥2 days), followed by a sustained increase in FiO2 (≥0.20) or PEEP (≥3 cmH2O) for ≥2 calendar days.</p>
             
-            <label>Infection Module</label>
-            <select id="module" onchange="updateUI()">
-                <option value="BSI">BSI (CLABSI)</option>
-                <option value="UTI">UTI (CAUTI)</option>
-                <option value="SSI">SSI (Surgical Site)</option>
-                <option value="VAE">VAE (Ventilator)</option>
-            </select>
+        </div>
+    </div>
+</div>
 
-            <label>Hospital Day of Event</label>
-            <input type="number" id="hospDay" value="3">
+<script>
+    // Update the Logic in your Calculate function:
+    function calculate() {
+        const mod = document.getElementById('module').value;
+        let isHai = false; let msg = "";
 
-            <div id="bsiControls" class="module-group">
-                <label>Organism Category</label>
-                <select id="bsiPath">
-                    <option value="LCBI1">Recognized Pathogen</option>
-                    <option value="LCBI2">Common Commensal (Adult)</option>
-                    <option value="LCBI3">Common Commensal (Infant)</option>
-                </select>
-                <label>Matching Cultures (Separate Occasions)</label>
-                <input type="number" id="bsiCult" value="1">
-                <label>Symptoms (Fever/Chills)</label>
-                <select id="bsiSym"><option value="no">No</option><option value="yes">Yes</option></select>
-                <label>Central Line in place > 2 days?</label>
-                <select id="bsiLine"><option value="yes">Yes</option><option value="no">No</option></select>
-            </div>
+        if (mod === 'VAE') {
+            const stable = document.getElementById('vaeStable').value === 'yes';
+            const sustained = document.getElementById('vaeSustained').value === 'yes';
+            const mag = document.getElementById('vaeMag').value === 'yes';
 
-            <div id="utiControls" class="module-group hidden">
-                <label>Urine Culture</label>
-                <select id="utiCult">
-                    <option value="SUTI1">Positive (≥10^5 CFU/ml, max 2 species)</option>
-                    <option value="NEG">Negative / Lower Growth</option>
-                </select>
-                <label>Specific Symptom Present?</label>
-                <select id="utiSym">
-                    <option value="no">None</option>
-                    <option value="yes">Fever / Suprapubic Pain / CVA Tenderness</option>
-                </select>
-                <label>Foley in place > 2 days?</label>
-                <select id="utiLine"><option value="yes">Yes</option><option value="no">No</option></select>
-            </div>
+            if (stable && sustained && mag) {
+                isHai = true;
+                msg = "VAE Confirmed: Criteria met for VAC (Ventilator-Associated Condition).";
+            } else {
+                msg = "Negative for VAE: Oxygenation trend does not meet CDC VAC thresholds.";
+            }
+        }
+        // ... (Keep your other BSI/UTI/SSI logic here)
 
-            <div id="ssiControls" class="module-group hidden">
-                <label>Depth of Infection</label>
-                <select id="ssiDepth">
-                    <option value="Superficial">Superficial Incisional</option>
-                    <option value="Deep">Deep Incisional</option>
-                    <option value="Organ/Space">Organ/Space</option>
-                </select>
-                <label>Procedure Category</label>
-                <select id="ssiWin">
-                    <option value="30">General Procedure (30 Days)</option>
-                    <option value="90">Implant/Cardiac/Neuro (90 Days)</option>
-                </select>
-                <label>Days Post-Op</label>
-                <input type="number" id="ssiDays">
-            </div>
-
-            <div id="vaeControls" class="
+        const box = document.getElementById('result');
+        box.style.display = "block";
+        box.className = "result-box " + (isHai ? "hai-pos" : "hai-neg");
+        box.innerHTML = `<strong>CLMMRH ANALYSIS: ${isHai ? "HAI/VAE DETECTED" : "NEGATIVE"}</strong><br>${msg}`;
+    }
+</script>
+</body>
+</html>
