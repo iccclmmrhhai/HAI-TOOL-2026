@@ -3,211 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NHSN HAI Deciphering Suite v2026</title>
+    <title>CLMMRH HAI Deciphering Suite - Ultimate</title>
     <style>
-        :root { --primary: #2563eb; --secondary: #64748b; --success: #16a34a; --danger: #dc2626; --bg: #f8fafc; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: #1e293b; line-height: 1.5; margin: 0; padding: 15px; }
-        .container { max-width: 900px; margin: 0 auto; }
-        .card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
-        .tabs { display: flex; gap: 10px; margin-bottom: 1rem; border-bottom: 2px solid #e2e8f0; overflow-x: auto; }
-        .tab-btn { padding: 10px 20px; border: none; background: none; cursor: pointer; font-weight: 600; color: var(--secondary); white-space: nowrap; }
-        .tab-btn.active { color: var(--primary); border-bottom: 3px solid var(--primary); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
-        label { display: block; font-weight: 600; margin-top: 1rem; font-size: 0.85rem; color: var(--secondary); }
-        select, input { width: 100%; padding: 0.6rem; border: 1px solid #cbd5e1; border-radius: 6px; margin-top: 5px; }
-        button { width: 100%; padding: 1rem; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 1.5rem; }
-        .btn-secondary { background: var(--secondary); margin-top: 10px; }
-        .btn-export { background: var(--success); margin-top: 10px; }
-        .result-box { margin-top: 1rem; padding: 1rem; border-radius: 8px; display: none; border-left: 5px solid; }
-        .hai-pos { background: #fef2f2; border-color: var(--danger); color: #991b1b; }
-        .hai-neg { background: #f0fdf4; border-color: var(--success); color: #166534; }
+        :root { --clmmrh-green: #008542; --clmmrh-blue: #0038a8; --bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
+        .header { background: var(--clmmrh-blue); color: white; padding: 15px; border-radius: 10px 10px 0 0; text-align: center; border-bottom: 4px solid var(--clmmrh-green); }
+        .card { background: white; padding: 20px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .tabs { display: flex; overflow-x: auto; background: #eee; padding: 5px; gap: 5px; }
+        .tab-btn { padding: 10px 20px; border: none; background: #ddd; cursor: pointer; font-weight: bold; border-radius: 5px; white-space: nowrap; }
+        .tab-btn.active { background: var(--clmmrh-blue); color: white; }
+        .module-group { border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; margin-top: 10px; background: #fafafa; }
+        label { display: block; font-weight: 600; margin-top: 12px; font-size: 0.85rem; color: #333; }
+        select, input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-top: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: var(--clmmrh-green); color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 20px; font-size: 1rem; }
+        .result-box { margin-top: 20px; padding: 15px; border-radius: 8px; display: none; border: 2px solid; line-height: 1.6; }
+        .hai-pos { background: #fff5f5; border-color: #c53030; color: #9b2c2c; }
+        .hai-neg { background: #f0fff4; border-color: #38a169; color: #22543d; }
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; font-size: 0.8rem; }
+        .dash-item { background: #eee; padding: 8px; border-radius: 4px; border-left: 3px solid var(--clmmrh-blue); }
         .hidden { display: none; }
         table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin-top: 10px; }
-        th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
-        .manual-section { font-size: 0.9rem; border-left: 3px solid var(--primary); padding-left: 15px; margin-bottom: 20px; }
+        th, td { padding: 8px; border: 1px solid #eee; text-align: left; }
+        @media print { .tabs, button, label, select, input, .header { display: none !important; } .result-box { display: block !important; border: 1px solid #000; } }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <div class="header">
+        <h2 style="margin:0">CLMMRH IPC</h2>
+        <p style="margin:0; font-size: 0.8rem;">Advanced HAI Classification Suite (2026)</p>
+    </div>
+
     <div class="tabs">
         <button class="tab-btn active" onclick="showTab('engine')">Decipher Engine</button>
-        <button class="tab-btn" onclick="showTab('history')">Case Log & Export</button>
-        <button class="tab-btn" onclick="showTab('manual')">User Manual</button>
-        <button class="tab-btn" onclick="showTab('docs')">CDC Reference</button>
+        <button class="tab-btn" onclick="showTab('history')">Case Log & Summary</button>
+        <button class="tab-btn" onclick="showTab('refs')">Manual</button>
     </div>
 
     <div id="tab-engine" class="tab-content">
         <div class="card">
-            <div class="grid">
-                <div>
-                    <label>Patient ID / Identifier</label>
-                    <input type="text" id="ptId" placeholder="Room/Initials">
-                </div>
-                <div>
-                    <label>Infection Module</label>
-                    <select id="module" onchange="updateUI()">
-                        <option value="BSI">CLABSI</option>
-                        <option value="UTI">CAUTI</option>
-                        <option value="SSI">SSI</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Hosp. Day of Event</label>
-                    <input type="number" id="hospDay" value="3">
-                </div>
-            </div>
+            <label>Patient ID / Room</label>
+            <input type="text" id="ptId" placeholder="Room-Bed">
+            
+            <label>Infection Module</label>
+            <select id="module" onchange="updateUI()">
+                <option value="BSI">BSI (CLABSI)</option>
+                <option value="UTI">UTI (CAUTI)</option>
+                <option value="SSI">SSI (Surgical Site)</option>
+                <option value="VAE">VAE (Ventilator)</option>
+            </select>
 
-            <div id="bsiControls">
-                <label>Pathogen</label>
-                <select id="bsiPath" onchange="updateUI()">
-                    <option value="rec">Recognized Pathogen</option>
-                    <option value="com">Common Commensal</option>
+            <label>Hospital Day of Event</label>
+            <input type="number" id="hospDay" value="3">
+
+            <div id="bsiControls" class="module-group">
+                <label>Organism Category</label>
+                <select id="bsiPath">
+                    <option value="LCBI1">Recognized Pathogen</option>
+                    <option value="LCBI2">Common Commensal (Adult)</option>
+                    <option value="LCBI3">Common Commensal (Infant)</option>
                 </select>
-                <div id="bsiComGroup" class="hidden">
-                    <label>Matching Cultures (Separate Occasions)</label>
-                    <input type="number" id="bsiCult" value="1">
-                    <label>Symptoms (Fever/Chills/Hypo)</label>
-                    <select id="bsiSym"><option value="no">No</option><option value="yes">Yes</option></select>
-                </div>
+                <label>Matching Cultures (Separate Occasions)</label>
+                <input type="number" id="bsiCult" value="1">
+                <label>Symptoms (Fever/Chills)</label>
+                <select id="bsiSym"><option value="no">No</option><option value="yes">Yes</option></select>
                 <label>Central Line in place > 2 days?</label>
                 <select id="bsiLine"><option value="yes">Yes</option><option value="no">No</option></select>
             </div>
 
-            <div id="utiControls" class="hidden">
-                <label>Culture (≥10^5 CFU/ml)</label>
-                <select id="utiCult"><option value="yes">Positive</option><option value="no">Negative</option></select>
-                <label>Symptoms (Fever/Pain/Urgency)</label>
-                <select id="utiSym"><option value="no">No</option><option value="yes">Yes</option></select>
+            <div id="utiControls" class="module-group hidden">
+                <label>Urine Culture</label>
+                <select id="utiCult">
+                    <option value="SUTI1">Positive (≥10^5 CFU/ml, max 2 species)</option>
+                    <option value="NEG">Negative / Lower Growth</option>
+                </select>
+                <label>Specific Symptom Present?</label>
+                <select id="utiSym">
+                    <option value="no">None</option>
+                    <option value="yes">Fever / Suprapubic Pain / CVA Tenderness</option>
+                </select>
                 <label>Foley in place > 2 days?</label>
                 <select id="utiLine"><option value="yes">Yes</option><option value="no">No</option></select>
             </div>
 
-            <div id="ssiControls" class="hidden">
-                <label>Surgical Window</label>
-                <select id="ssiWin"><option value="30">30-Day Window</option><option value="90">90-Day (Implant)</option></select>
+            <div id="ssiControls" class="module-group hidden">
+                <label>Depth of Infection</label>
+                <select id="ssiDepth">
+                    <option value="Superficial">Superficial Incisional</option>
+                    <option value="Deep">Deep Incisional</option>
+                    <option value="Organ/Space">Organ/Space</option>
+                </select>
+                <label>Procedure Category</label>
+                <select id="ssiWin">
+                    <option value="30">General Procedure (30 Days)</option>
+                    <option value="90">Implant/Cardiac/Neuro (90 Days)</option>
+                </select>
                 <label>Days Post-Op</label>
                 <input type="number" id="ssiDays">
             </div>
 
-            <button onclick="calculate()">Analyze & Save Case</button>
-            <div id="result" class="result-box"></div>
-        </div>
-    </div>
-
-    <div id="tab-history" class="tab-content hidden">
-        <div class="card">
-            <h3>Case Log</h3>
-            <table id="histTable">
-                <thead><tr><th>Patient</th><th>Type</th><th>Result</th><th>Rational</th></tr></thead>
-                <tbody></tbody>
-            </table>
-            <button class="btn-export" onclick="exportToCSV()">Download Log (CSV)</button>
-            <button class="btn-secondary" onclick="clearLogs()">Clear All Data</button>
-        </div>
-    </div>
-
-    <div id="tab-manual" class="tab-content hidden">
-        <div class="card">
-            <h3>App User Manual</h3>
-            <div class="manual-section">
-                <h4>1. Data Entry</h4>
-                <p>Enter the Patient ID and select the module. <strong>Hospital Day</strong> is critical: Day 1 is the day of admission. Day 3 is the first day an HAI can be called.</p>
-            </div>
-            <div class="manual-section">
-                <h4>2. Deciphering Commensals</h4>
-                <p>If a blood culture shows skin flora (e.g., CoNS), the app will only trigger an HAI if you enter <strong>2 matching cultures</strong> and confirm the patient had a <strong>fever</strong>.</p>
-            </div>
-            <div class="manual-section">
-                <h4>3. Exporting for Audit</h4>
-                <p>Use the "Export" button in the Case Log tab to save your work. This creates a file you can open in Excel for monthly reporting.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="tab-docs" class="tab-content hidden">
-        <div class="card">
-            <h3>NHSN Criteria Cheat Sheet</h3>
-            
-            <hr>
-            
-            <hr>
-            
-        </div>
-    </div>
-</div>
-
-<script>
-    function showTab(name) {
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById('tab-'+name).classList.remove('hidden');
-        if(event) event.currentTarget.classList.add('active');
-    }
-
-    function updateUI() {
-        const mod = document.getElementById('module').value;
-        document.getElementById('bsiControls').classList.toggle('hidden', mod !== 'BSI');
-        document.getElementById('utiControls').classList.toggle('hidden', mod !== 'UTI');
-        document.getElementById('ssiControls').classList.toggle('hidden', mod !== 'SSI');
-        document.getElementById('bsiComGroup').classList.toggle('hidden', document.getElementById('bsiPath').value !== 'com');
-    }
-
-    function calculate() {
-        const mod = document.getElementById('module').value;
-        const pt = document.getElementById('ptId').value || "Unidentified";
-        const day = parseInt(document.getElementById('hospDay').value);
-        let res = false; let msg = "";
-
-        if (day <= 2 && mod !== 'SSI') {
-            msg = "POA (Present on Admission)";
-        } else if (mod === 'BSI') {
-            const path = document.getElementById('bsiPath').value;
-            const line = document.getElementById('bsiLine').value === 'yes';
-            if (path === 'rec' && line) { res = true; msg = "CLABSI (LCBI 1)"; }
-            else if (path === 'com' && line && parseInt(document.getElementById('bsiCult').value) >= 2 && document.getElementById('bsiSym').value === 'yes') { res = true; msg = "CLABSI (LCBI 2)"; }
-            else { msg = "Negative for CLABSI"; }
-        } else if (mod === 'UTI') {
-            if (document.getElementById('utiCult').value === 'yes' && document.getElementById('utiSym').value === 'yes' && document.getElementById('utiLine').value === 'yes') { res = true; msg = "CAUTI (SUTI 1)"; }
-            else { msg = "Negative for CAUTI"; }
-        } else if (mod === 'SSI') {
-            if (parseInt(document.getElementById('ssiDays').value) <= parseInt(document.getElementById('ssiWin').value)) { res = true; msg = "SSI Confirmed"; }
-            else { msg = "Negative (Outside Window)"; }
-        }
-
-        const box = document.getElementById('result');
-        box.style.display = "block";
-        box.className = "result-box " + (res ? "hai-pos" : "hai-neg");
-        box.innerHTML = `<strong>${res ? "HAI DETECTED" : "NO HAI"}</strong><br>${msg}`;
-        
-        const logs = JSON.parse(localStorage.getItem('hai_v3_logs') || '[]');
-        logs.unshift({pt, type: mod, res: res ? 'POSITIVE' : 'NEGATIVE', msg: msg});
-        localStorage.setItem('hai_v3_logs', JSON.stringify(logs));
-        renderLogs();
-    }
-
-    function renderLogs() {
-        const logs = JSON.parse(localStorage.getItem('hai_v3_logs') || '[]');
-        document.querySelector('#histTable tbody').innerHTML = logs.map(l => `<tr><td>${l.pt}</td><td>${l.type}</td><td>${l.res}</td><td>${l.msg}</td></tr>`).join('');
-    }
-
-    function exportToCSV() {
-        const logs = JSON.parse(localStorage.getItem('hai_v3_logs') || '[]');
-        let csv = "Patient,Type,Result,Rational\n";
-        logs.forEach(l => { csv += `${l.pt},${l.type},${l.res},${l.msg}\n`; });
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.setAttribute('hidden', '');
-        a.setAttribute('href', url);
-        a.setAttribute('download', 'hai_export.csv');
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }
-
-    function clearLogs() { if(confirm("Erase history?")) { localStorage.removeItem('hai_v3_logs'); renderLogs(); } }
-    window.onload = () => { updateUI(); renderLogs(); };
-</script>
-</body>
-</html>
+            <div id="vaeControls" class="
