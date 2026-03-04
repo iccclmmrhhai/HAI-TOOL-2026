@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLMMRH Master IPC Suite</title>
+    <title>CLMMRH IPC Master Suite</title>
     <style>
         :root { --clmmrh-green: #008542; --clmmrh-blue: #0038a8; --bg: #f1f5f9; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 15px; color: #334155; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 15px; color: #334155; }
         .header { background: var(--clmmrh-blue); color: white; padding: 25px; border-radius: 12px 12px 0 0; text-align: center; border-bottom: 5px solid var(--clmmrh-green); }
         .logo-img { width: 65px; height: 65px; background: white; border-radius: 50%; padding: 5px; margin-bottom: 8px; }
         .card { background: white; padding: 30px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
@@ -17,13 +17,12 @@
         h3 { margin-top: 0; color: var(--clmmrh-blue); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; font-size: 1.1rem; }
         label { display: block; font-weight: 700; margin-top: 15px; font-size: 0.85rem; color: #475569; }
         select, input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; margin-top: 5px; font-size: 0.95rem; }
-        .calc-btn { width: 100%; padding: 18px; background: var(--clmmrh-blue); color: white; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; font-size: 1.1rem; }
+        .calc-btn { width: 100%; padding: 18px; background: var(--clmmrh-blue); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; font-size: 1.1rem; width: 100%; }
         .result-box { margin-top: 20px; padding: 20px; border-radius: 10px; display: none; border: 2px solid; line-height: 1.5; }
         .hai-pos { background: #fff1f2; border-color: #fda4af; color: #9f1239; }
         .hai-neg { background: #f0fdf4; border-color: #86efac; color: #166534; }
-        .manual-section { border-left: 4px solid var(--clmmrh-green); padding-left: 20px; margin-bottom: 40px; font-size: 0.9rem; }
-        .manual-section h2 { color: var(--clmmrh-blue); font-size: 1.3rem; margin-top: 0; }
-        .tech-def { background: #f8fafc; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 10px; white-space: pre-wrap; font-family: 'Segoe UI', sans-serif; }
+        .manual-section { border-left: 4px solid var(--clmmrh-green); padding-left: 20px; margin-bottom: 40px; }
+        .tech-def { background: #f8fafc; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 10px; white-space: pre-wrap; font-size: 0.85rem; }
         .hidden { display: none; }
     </style>
 </head>
@@ -32,12 +31,12 @@
 <div class="header">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/DOH_Logo.png" alt="CLMMRH" class="logo-img">
     <div style="font-size: 1.5rem; font-weight: 800;">CLMMRH IPC MASTER SUITE</div>
-    <div style="font-size: 0.8rem; opacity: 0.8;">Bacolod City, Philippines | 2026 NHSN Protocol</div>
+    <div style="font-size: 0.8rem; opacity: 0.8;">2026 NHSN Protocol Compliance</div>
 </div>
 
 <div class="tabs">
     <button class="tab-btn active" onclick="showTab('calc')">CALCULATORS</button>
-    <button class="tab-btn" onclick="showTab('manual')">2026 CDC/NHSN MANUAL</button>
+    <button class="tab-btn" onclick="showTab('manual')">2026 CDC MANUAL</button>
 </div>
 
 <div id="tab-calc">
@@ -46,86 +45,85 @@
         <input type="number" id="hospDay" value="3">
 
         <div class="module">
-            <h3>I. CLABSI Module</h3>
+            <h3>I. CLABSI (LCBI 1, 2, 3)</h3>
             <label>Central Line Status</label>
-            <select id="clabsiLine"><option value="no">No</option><option value="yes">Yes (>2 Days)</option></select>
-            <label>Culture Result</label>
-            <select id="clabsiCulture">
-                <option value="none">Negative</option>
-                <option value="pathogen">Recognized Pathogen (1+)</option>
-                <option value="commensal2">Commensal (2+ matching)</option>
-            </select>
-            <label>Symptoms</label>
-            <select id="clabsiSymp">
-                <option value="none">None</option>
-                <option value="adult">Fever/Chills/Hypotension</option>
-                <option value="infant">Infant: Apnea/Brady/Hypothermia</option>
-            </select>
-        </div>
-
-        <div class="module">
-            <h3>II. CAUTI Module</h3>
-            <label>Catheter Status</label>
-            <select id="cautiStatus">
-                <option value="none">No Catheter</option>
-                <option value="inPlace">In place > 2 days</option>
-                <option value="removed">Removed Day Before/Day of Event</option>
-            </select>
-            <label>Urine Culture</label>
-            <select id="cautiCulture">
-                <option value="none">< 10^5 CFU/ml</option>
-                <option value="pos">≥ 10^5 CFU/ml (Max 2 spp)</option>
-            </select>
-            <label>Symptoms</label>
-            <select id="cautiSymp">
-                <option value="none">Asymptomatic</option>
-                <option value="adult">SUTI 1: Fever/Pain/Tenderness</option>
-                <option value="infant">SUTI 2: Apnea/Brady/Lethargy/Vomiting</option>
-            </select>
-            <label>Secondary Blood Match (For ABUTI)</label>
-            <select id="cautiBlood"><option value="no">No Match</option><option value="yes">Organism matches urine culture</option></select>
-        </div>
-
-        <div class="module">
-            <h3>III. SSI Module</h3>
-            <label>Procedure Category</label>
-            <select id="ssiProc" onchange="updateSSIWindow()">
-                <option value="30">General Procedures (30 Day Window)</option>
-                <option value="90">Major/Implant Procedures (90 Day Window)</option>
-            </select>
-            <label>Depth</label>
-            <select id="ssiDepth">
-                <option value="none">No Infection</option>
-                <option value="Superficial">Superficial Incisional</option>
-                <option value="Deep">Deep Incisional</option>
-                <option value="Organ">Organ/Space</option>
-            </select>
-            <label>Signs/Symptoms</label>
-            <select id="ssiSymp">
-                <option value="none">None</option>
-                <option value="purulent">Purulent drainage</option>
-                <option value="abscess">Abscess/Imaging Evidence</option>
-                <option value="dehiscence">Dehiscence + Fever</option>
-            </select>
+            <select id="clabsiLine"><option value="no">No</option><option value="yes">In place > 2 days</option></select>
+            <label>Culture & Symptoms</label>
             <div style="display:flex; gap:10px;">
-                <div style="flex:1;"><label>Days Post-Op</label><input type="number" id="ssiDays" value="0"></div>
-                <div style="flex:1;"><label>Window Used</label><input type="text" id="ssiWinDisp" value="30 Days" disabled></div>
+                <select id="clabsiCulture">
+                    <option value="none">Negative</option>
+                    <option value="pathogen">Pathogen (1+)</option>
+                    <option value="commensal2">Commensal (2+ matching)</option>
+                </select>
+                <select id="clabsiSymp">
+                    <option value="none">No Symptoms</option>
+                    <option value="adult">Fever/Chills/Hypotension</option>
+                    <option value="infant">Apnea/Brady/Hypothermia</option>
+                </select>
             </div>
         </div>
 
         <div class="module">
-            <h3>IV. VAE/pedVAE Module</h3>
-            <label>Step 1: Stability Baseline</label>
-            <select id="vaeStable"><option value="no">Unstable</option><option value="yes">≥2 days stability</option></select>
-            <label>Step 2: Deterioration</label>
+            <h3>II. CAUTI & ABUTI (With or Without Catheter)</h3>
+            <label>Indwelling Catheter Status</label>
+            <select id="cautiStatus">
+                <option value="none">No Catheter</option>
+                <option value="inPlace">In place > 2 days (SUTI 1a)</option>
+                <option value="removed">Removed Day Before/Day of Event (SUTI 1b)</option>
+            </select>
+            <label>Urine Culture (≥10^5 CFU/ml)</label>
+            <select id="cautiCulture"><option value="no">No</option><option value="yes">Yes (Max 2 spp)</option></select>
+            <label>Symptoms</label>
+            <select id="cautiSymp">
+                <option value="none">Asymptomatic</option>
+                <option value="adult">Fever/Suprapubic/CVA/Dysuria</option>
+                <option value="infant">Apnea/Brady/Lethargy/Vomiting</option>
+            </select>
+            <label>Secondary Blood Match (For ABUTI)</label>
+            <select id="cautiBlood"><option value="no">No Match</option><option value="yes">Organism Matches Urine</option></select>
+        </div>
+
+        <div class="module">
+            <h3>III. SSI (Surgical Site Infection)</h3>
+            <label>Procedure Category (Sets Window Period)</label>
+            <select id="ssiProc">
+                <option value="30">General (APPY, CHOL, COLO, HYST, SB, THOR) - 30 Days</option>
+                <option value="90">Major (BPRO, CARD, CBGB, CRAN, HPRO, KPRO, VSHN) - 90 Days</option>
+            </select>
+            <label>Depth & Symptoms</label>
+            <div style="display:flex; gap:10px;">
+                <select id="ssiDepth">
+                    <option value="none">No Infection</option>
+                    <option value="Superficial">Superficial</option>
+                    <option value="Deep">Deep Incisional</option>
+                    <option value="Organ">Organ/Space</option>
+                </select>
+                <select id="ssiSymp">
+                    <option value="none">No Symptoms</option>
+                    <option value="purulent">Purulent Drainage</option>
+                    <option value="abscess">Abscess/Imaging Evidence</option>
+                    <option value="dehiscence">Dehiscence + Fever</option>
+                </select>
+            </div>
+            <label>Days Post-Op</label>
+            <input type="number" id="ssiDays" value="0">
+        </div>
+
+        <div class="module">
+            <h3>IV. VAE / pedVAE Module</h3>
+            <label>NHSN Step 1: Stability (≥2 days)</label>
+            <select id="vaeStable"><option value="no">No</option><option value="yes">Yes</option></select>
+            <label>NHSN Step 2: Deterioration (≥2 days)</label>
             <select id="vaeDeter">
                 <option value="none">None</option>
-                <option value="vac">Adult VAC (PEEP/FiO2)</option>
-                <option value="ped">pedVAE (MAP/FiO2)</option>
+                <option value="vac">VAC (Adult: PEEP/FiO2)</option>
+                <option value="ped">pedVAE (Pediatric: MAP/FiO2)</option>
             </select>
-            <label>Step 3/4: IVAC & PVAP Evidence</label>
-            <select id="vaeIvac"><option value="no">No IVAC</option><option value="yes">IVAC (+Abx/WBC)</option></select>
-            <select id="vaePvap"><option value="no">No PVAP</option><option value="yes">PVAP (+Micro/Lab)</option></select>
+            <label>IVAC & PVAP Evidence</label>
+            <div style="display:flex; gap:10px;">
+                <select id="vaeIvac"><option value="no">No IVAC</option><option value="yes">IVAC (+Abx/WBC)</option></select>
+                <select id="vaePvap"><option value="no">No PVAP</option><option value="yes">PVAP (+Micro)</option></select>
+            </div>
         </div>
 
         <button class="calc-btn" onclick="processAudit()">GENERATE AUDIT FINDINGS</button>
@@ -136,15 +134,12 @@
 <div id="tab-manual" class="hidden">
     <div class="card">
         <div class="manual-section">
-            <h2>CAUTI 2026 Definitions</h2>
+            <h2>CAUTI & ABUTI Definitions (NHSN 2026)</h2>
             <div class="tech-def">
-<strong>SUTI 1a:</strong> Patient has an indwelling urinary catheter in place for >2 calendar days on the date of event (Day 1 = catheter insertion) AND has at least one: fever (>38.0°C), suprapubic tenderness, costovertebral angle pain, or urgency/frequency/dysuria AND culture with no more than two species, at least one is ≥10^5 CFU/ml.
-
-<strong>SUTI 1b:</strong> Patient has an indwelling urinary catheter that was removed the day of or the day before the date of event AND at least one: fever (>38.0°C), suprapubic tenderness, costovertebral angle pain, or urgency/frequency/dysuria AND culture with no more than two species, at least one is ≥10^5 CFU/ml.
-
-<strong>SUTI 2 (Pediatric):</strong> Patient ≤ 1 year of age (with or without catheter) has at least one of the following: fever (>38.0°C), hypothermia (<36.0°C), apnea, bradycardia, lethargy, or vomiting AND urine culture with no more than two species, at least one is ≥10^5 CFU/ml.
-
-<strong>ABUTI (Asymptomatic Bacteremic UTI):</strong> Patient has no localized urinary signs/symptoms (e.g., no fever, no urgency) but has a urine culture with no more than two species, at least one is ≥10^5 CFU/ml, AND a positive blood culture with at least one matching organism.
+<strong>SUTI 1a (Catheter-Associated):</strong> Indwelling catheter in place for >2 calendar days. Symptom (Fever/Pain) + Culture ≥10^5 CFU/ml.
+<strong>SUTI 1b (Catheter-Associated):</strong> Catheter removed day of or before event. Symptom + Culture ≥10^5 CFU/ml.
+<strong>SUTI 2 (Pediatric - With or Without Catheter):</strong> Patient ≤1 yr. Fever/Apnea/Brady/Lethargy/Vomiting + Culture ≥10^5 CFU/ml.
+<strong>ABUTI (With or Without Catheter):</strong> No symptoms + Culture ≥10^5 CFU/ml + Matching blood culture organism.
             </div>
         </div>
         
@@ -152,27 +147,23 @@
         <div class="manual-section">
             <h2>CLABSI (LCBI) Definitions</h2>
             <div class="tech-def">
-<strong>LCBI 1:</strong> Patient of any age has a recognized pathogen (not a common commensal) identified from one or more blood specimens.
-
-<strong>LCBI 2:</strong> Patient > 1 year of age has at least one: fever (>38.0°C), chills, or hypotension AND matching common commensals (e.g., CoNS) identified from two or more blood specimens collected on separate occasions (within the GAP).
-
-<strong>LCBI 3:</strong> Patient ≤ 1 year of age has at least one: fever (>38.0°C), hypothermia (<36.0°C), apnea, or bradycardia AND matching common commensals identified from two or more blood specimens collected on separate occasions.
+<strong>LCBI 1:</strong> Any age. Recognized pathogen from 1+ blood cultures.
+<strong>LCBI 2:</strong> >1 yr. Fever/Chills/Hypotension + 2 matching commensals.
+<strong>LCBI 3:</strong> ≤1 yr. Fever/Hypothermia/Apnea/Brady + 2 matching commensals.
             </div>
         </div>
         
 
         <div class="manual-section">
-            <h2>SSI Criteria & Procedures</h2>
+            <h2>SSI Definitions & Procedures</h2>
             <div class="tech-def">
-<strong>Superficial Incisional:</strong> Involves only skin and subcutaneous tissue. Requires purulent drainage, culture identification, or localized signs (pain, swelling, redness) plus physician diagnosis.
+<strong>Superficial:</strong> Skin/SubQ only. Purulent drainage or signs + physician diagnosis.
+<strong>Deep:</strong> Fascia/Muscle. Purulent drainage or dehiscence + fever.
+<strong>Organ/Space:</strong> Deeper than muscle. Drainage from organ drain or abscess on imaging.
 
-<strong>Deep Incisional:</strong> Involves fascia and muscle layers. Requires purulent drainage, spontaneous dehiscence with fever, or an abscess/evidence of infection on imaging/re-op.
-
-<strong>Organ/Space:</strong> Involves any part of the body deeper than the fascial/muscle layers that was opened or manipulated. Requires purulent drainage from a drain in the organ/space or abscess.
-
-<strong>Surveillance Windows:</strong>
+<strong>Procedures:</strong>
 • 30-Day: APPY, CHOL, COLO, HYST, OVRY, SB, THOR.
-• 90-Day: CARD, CBGB, CBGC, CRAN, FUSN, HPRO, KPRO, PVBY, RFN, VSHN.
+• 90-Day: CARD, CBGB, CRAN, FUSN, HPRO, KPRO, VSHN.
             </div>
         </div>
         
@@ -180,13 +171,9 @@
         <div class="manual-section">
             <h2>VAE & pedVAE Definitions</h2>
             <div class="tech-def">
-<strong>VAC:</strong> Patient has baseline stability (≥2 days) followed by an increase in daily minimum PEEP (≥3 cmH2O) or FiO2 (≥0.20) sustained for ≥2 days.
-
-<strong>iVAC:</strong> Meets VAC criteria AND has temperature (>38°C or <36°C) or WBC (≥12k or ≤4k) AND a new antimicrobial agent is started and continued for ≥4 days.
-
-<strong>PVAP (Possible VAP):</strong> Meets iVAC criteria AND has positive respiratory culture (ETA ≥10^5, BAL ≥10^4) OR positive histopathology.
-
-<strong>pedVAE:</strong> Specifically for <18 years. Includes <strong>Mean Airway Pressure (MAP)</strong> rise of ≥4 cmH2O as a primary indicator of respiratory deterioration alongside PEEP and FiO2.
+<strong>VAC:</strong> Stability (2 days) then PEEP rise ≥3 or FiO2 rise ≥0.20 (2 days).
+<strong>pedVAE:</strong> Stability (2 days) then MAP rise ≥4 or FiO2 rise ≥0.20 (2 days).
+<strong>PVAP:</strong> iVAC criteria met + Positive culture (ETA ≥10^5, BAL ≥10^4).
             </div>
         </div>
         
@@ -200,55 +187,61 @@
         document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', (i===0 && t==='calc') || (i===1 && t==='manual')));
     }
 
-    function updateSSIWindow() {
-        document.getElementById('ssiWinDisp').value = document.getElementById('ssiProc').value + " Days";
-    }
-
     function processAudit() {
         const hDay = parseInt(document.getElementById('hospDay').value);
         let res = [];
 
-        // CLABSI Logic
+        // CLABSI
         if (document.getElementById('clabsiLine').value === 'yes' && hDay > 2) {
             const cult = document.getElementById('clabsiCulture').value;
             const sym = document.getElementById('clabsiSymp').value;
-            if (cult === 'pathogen') res.push("<b>LCBI 1 (CLABSI):</b> Pathogen identified.");
-            else if (cult === 'commensal2' && sym !== 'none') res.push(`<b>LCBI ${sym === 'infant' ? '3' : '2'} (CLABSI):</b> Commensals + Signs.`);
+            if (cult === 'pathogen') res.push("<b>LCBI 1 (CLABSI):</b> Pathogen confirmed.");
+            else if (cult === 'commensal2' && sym !== 'none') res.push(`<b>LCBI ${sym==='infant'?'3':'2'} (CLABSI):</b> Commensals + Symptoms.`);
         }
 
-        // CAUTI Logic (SUTI 1a, 1b, 2, ABUTI)
+        // UTI / ABUTI (With or Without Catheter Logic)
         const cStat = document.getElementById('cautiStatus').value;
-        const cCult = document.getElementById('cautiCulture').value === 'pos';
+        const cCult = document.getElementById('cautiCulture').value === 'yes';
         const cSym = document.getElementById('cautiSymp').value;
         const cBlood = document.getElementById('cautiBlood').value === 'yes';
 
-        if (cStat !== 'none' && hDay > 2) {
-            if (cCult && cSym === 'adult') res.push(`<b>SUTI 1${cStat === 'inPlace' ? 'a' : 'b'} (CAUTI):</b> Symptomatic.`);
-            else if (cCult && cSym === 'infant') res.push("<b>SUTI 2 (CAUTI):</b> Pediatric symptoms met.");
-            else if (cCult && cSym === 'none' && cBlood) res.push("<b>ABUTI:</b> Asymptomatic Bacteremic UTI confirmed.");
+        if (hDay > 2 && cCult) {
+            // Priority 1: ABUTI (No Catheter Required)
+            if (cSym === 'none' && cBlood) {
+                res.push("<b>ABUTI:</b> Asymptomatic Bacteremic UTI (Device Independent).");
+            } 
+            // Priority 2: SUTI 2 (No Catheter Required)
+            else if (cSym === 'infant') {
+                res.push("<b>SUTI 2 (UTI):</b> Pediatric criteria met (Device Independent).");
+            }
+            // Priority 3: CAUTI (Requires Catheter)
+            else if (cStat !== 'none' && cSym === 'adult') {
+                res.push(`<b>SUTI 1${cStat === 'inPlace' ? 'a' : 'b'} (CAUTI):</b> Symptomatic with device.`);
+            }
         }
 
-        // SSI Logic
+        // SSI
         const sDepth = document.getElementById('ssiDepth').value;
-        if (sDepth !== 'none' && document.getElementById('ssiSymp').value !== 'none') {
+        const sSym = document.getElementById('ssiSymp').value;
+        if (sDepth !== 'none' && sSym !== 'none') {
             const sDay = parseInt(document.getElementById('ssiDays').value);
-            const sWin = parseInt(document.getElementById('ssiProc').value);
-            if (sDay <= sWin) res.push(`<b>SSI (${sDepth}):</b> Clinical criteria met in ${sWin}-day window.`);
+            const sWin = parseInt(document.getElementById('ssiProc').value); // Locked to 30 or 90
+            if (sDay <= sWin) res.push(`<b>SSI (${sDepth}):</b> Positive within ${sWin}-day window.`);
         }
 
-        // VAE Logic
+        // VAE
         if (document.getElementById('vaeStable').value === 'yes' && document.getElementById('vaeDeter').value !== 'none') {
             let v = document.getElementById('vaeDeter').value === 'ped' ? "pedVAC" : "VAC";
             if (document.getElementById('vaeIvac').value === 'yes') v = v.replace('VAC', 'IVAC');
             if (document.getElementById('vaePvap').value === 'yes') v = v.replace('IVAC', 'PVAP').replace('VAC', 'PVAP');
-            res.push(`<b>${v}:</b> Deterioration follows a stability period.`);
+            res.push(`<b>${v}:</b> Deterioration logic met.`);
         }
 
         const box = document.getElementById('result');
         box.style.display = "block";
         if (res.length > 0) {
             box.className = "result-box hai-pos";
-            box.innerHTML = "<strong>AUDIT POSITIVE:</strong><br><br>" + res.join("<br>");
+            box.innerHTML = "<strong>AUDIT FINDINGS:</strong><br><br>" + res.join("<br>");
         } else {
             box.className = "result-box hai-neg";
             box.innerHTML = "<strong>AUDIT NEGATIVE:</strong> No HAI criteria met.";
@@ -257,40 +250,3 @@
 </script>
 </body>
 </html>
-    <script>
-    function processAudit() {
-        const hDay = parseInt(document.getElementById('hospDay').value);
-        let res = [];
-
-        // 1. CLABSI LOGIC (No change)
-        if (document.getElementById('clabsiLine').value === 'yes' && hDay > 2) {
-            const cult = document.getElementById('clabsiCulture').value;
-            const sym = document.getElementById('clabsiSymp').value;
-            if (cult === 'pathogen') res.push("<b>LCBI 1 (CLABSI):</b> Pathogen identified.");
-            else if (cult === 'commensal2' && sym !== 'none') res.push(`<b>LCBI ${sym === 'infant' ? '3' : '2'} (CLABSI):</b> Commensals + Signs.`);
-        }
-
-        // 2. UPDATED CAUTI/UTI LOGIC (ABUTI "With or Without Catheter")
-        const cStat = document.getElementById('cautiStatus').value;
-        const cCult = document.getElementById('cautiCulture').value === 'pos';
-        const cSym = document.getElementById('cautiSymp').value;
-        const cBlood = document.getElementById('cautiBlood').value === 'yes';
-
-        // Check for ABUTI first (Independent of Catheter)
-        if (cCult && cSym === 'none' && cBlood && hDay > 2) {
-            res.push("<b>ABUTI:</b> Asymptomatic Bacteremic UTI (Criteria met with or without catheter).");
-        } 
-        // Then check for Symptomatic CAUTI (Requires Catheter)
-        else if (cStat !== 'none' && hDay > 2) {
-            if (cCult && cSym === 'adult') {
-                res.push(`<b>SUTI 1${cStat === 'inPlace' ? 'a' : 'b'} (CAUTI):</b> Symptomatic with device.`);
-            } else if (cCult && cSym === 'infant') {
-                res.push("<b>SUTI 2 (UTI):</b> Pediatric symptoms met (with or without catheter).");
-            }
-        }
-
-        // 3. SSI & 4. VAE LOGIC (No changes as requested)
-        // ... [Rest of processing logic remains same] ...
-    }
-</script>
-
