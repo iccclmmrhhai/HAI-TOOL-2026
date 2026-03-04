@@ -5,25 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CLMMRH HAI Master Suite</title>
     <style>
-        :root { --clmmrh-green: #008542; --clmmrh-blue: #0038a8; --bg: #f4f7f9; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; color: #2d3748; }
-        .header { background: var(--clmmrh-blue); color: white; padding: 25px; border-radius: 12px 12px 0 0; text-align: center; border-bottom: 6px solid var(--clmmrh-green); }
-        .logo { font-size: 2rem; font-weight: 800; letter-spacing: 1px; margin-bottom: 5px; }
-        .card { background: white; padding: 25px; border-radius: 0 0 12px 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        .tabs { display: flex; background: #e2e8f0; padding: 6px; gap: 6px; border-radius: 10px; margin-bottom: 15px; overflow-x: auto; }
-        .tab-btn { flex: 1; padding: 12px; border: none; background: #cbd5e0; cursor: pointer; font-weight: 700; border-radius: 8px; transition: 0.2s; white-space: nowrap; }
-        .tab-btn.active { background: var(--clmmrh-blue); color: white; }
-        .module-group { border: 2px solid #edf2f7; padding: 20px; border-radius: 12px; background: #f8fafc; margin-top: 15px; }
-        label { display: block; font-weight: 700; margin-top: 18px; font-size: 0.9rem; color: #4a5568; }
-        select, input { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 10px; margin-top: 8px; box-sizing: border-box; font-size: 1rem; }
-        button#calcBtn { width: 100%; padding: 20px; background: var(--clmmrh-green); color: white; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; margin-top: 30px; font-size: 1.2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .result-box { margin-top: 25px; padding: 25px; border-radius: 12px; display: none; border-left: 10px solid; animation: fadeIn 0.4s ease; }
-        .hai-pos { background: #fff5f5; border-color: #e53e3e; color: #9b2c2c; }
-        .hai-neg { background: #f0fff4; border-color: #38a169; color: #22543d; }
+        :root { --clmmrh-green: #008542; --clmmrh-blue: #0038a8; --bg: #f8fafc; }
+        body { font-family: 'Inter', 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 10px; color: #1e293b; line-height: 1.6; }
+        .header { background: var(--clmmrh-blue); color: white; padding: 30px 20px; border-radius: 15px 15px 0 0; text-align: center; border-bottom: 6px solid var(--clmmrh-green); }
+        .logo { font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 5px; }
+        .card { background: white; padding: 25px; border-radius: 0 0 15px 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .tabs { display: flex; background: #e2e8f0; padding: 6px; gap: 6px; border-radius: 12px; margin-bottom: 15px; }
+        .tab-btn { flex: 1; padding: 14px; border: none; background: transparent; cursor: pointer; font-weight: 700; border-radius: 10px; transition: 0.3s; color: #64748b; }
+        .tab-btn.active { background: white; color: var(--clmmrh-blue); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .module-group { border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; background: #ffffff; margin-top: 15px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        label { display: block; font-weight: 700; margin-top: 20px; font-size: 0.85rem; text-transform: uppercase; color: #475569; letter-spacing: 0.5px; }
+        select, input { width: 100%; padding: 14px; border: 2px solid #cbd5e1; border-radius: 10px; margin-top: 8px; box-sizing: border-box; font-size: 1rem; transition: border 0.2s; }
+        select:focus, input:focus { border-color: var(--clmmrh-blue); outline: none; }
+        button#calcBtn { width: 100%; padding: 22px; background: var(--clmmrh-blue); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; margin-top: 30px; font-size: 1.2rem; transition: 0.3s; }
+        button#calcBtn:hover { background: #002d86; transform: translateY(-2px); }
+        .result-box { margin-top: 25px; padding: 25px; border-radius: 15px; display: none; border: 2px solid; animation: slideUp 0.4s ease; }
+        .hai-pos { background: #fff1f2; border-color: #fda4af; color: #9f1239; }
+        .hai-neg { background: #f0fdf4; border-color: #86efac; color: #166534; }
         .hidden { display: none; }
-        h3 { color: var(--clmmrh-blue); margin: 0 0 10px 0; border-bottom: 2px solid #edf2f7; padding-bottom: 10px; }
-        .manual-item { margin-bottom: 25px; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        h3 { color: var(--clmmrh-blue); margin-top: 0; display: flex; align-items: center; gap: 8px; }
+        .manual-entry { margin-bottom: 40px; border-left: 4px solid var(--clmmrh-green); padding-left: 20px; }
+        .vae-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -31,168 +34,182 @@
 <div class="container">
     <div class="header">
         <div class="logo">CLMMRH</div>
-        <div style="font-weight: 600; font-size: 0.9rem; margin-top: 5px;">Infection Prevention & Control Committee</div>
-        <div style="font-size: 0.75rem; letter-spacing: 1.5px; margin-top: 10px; background: rgba(255,255,255,0.2); display: inline-block; padding: 3px 10px; border-radius: 5px;">OFFICIAL DECIPHERING SUITE</div>
+        <div style="font-weight: 600; opacity: 0.9;">Infection Prevention & Control Committee</div>
+        <div style="font-size: 0.75rem; background: var(--clmmrh-green); display: inline-block; padding: 4px 12px; border-radius: 20px; margin-top: 10px;">BLIND AUDIT ENGINE v2026.1</div>
     </div>
 
     <div class="tabs">
-        <button class="tab-btn active" onclick="showTab('engine')">CALCULATOR</button>
-        <button class="tab-btn" onclick="showTab('manual')">MANUAL</button>
-        <button class="tab-btn" onclick="showTab('analysis')">ANALYSIS</button>
+        <button class="tab-btn active" id="btn-engine" onclick="showTab('engine')">AUDIT TOOL</button>
+        <button class="tab-btn" id="btn-manual" onclick="showTab('manual')">DETAILED MANUAL</button>
     </div>
 
-    <div id="tab-engine" class="tab-content">
+    <div id="tab-engine">
         <div class="card">
-            <label>Module Selection</label>
-            <select id="module" onchange="updateUI()">
-                <option value="BSI">BSI (CLABSI)</option>
-                <option value="UTI">UTI (CAUTI)</option>
-                <option value="SSI">SSI (Surgical Site)</option>
-                <option value="VAE">VAE (Ventilator)</option>
-            </select>
-
-            <label>Hospital Day (Day 1 = Admission)</label>
+            <h3>Step 1: Clinical Environment</h3>
+            <label>Hospital Day of Event (Day 1 = Adm)</label>
             <input type="number" id="hospDay" value="3">
 
-            <div id="bsiControls" class="module-group">
-                <h3>CLABSI (LCBI) Pathway</h3>
-                <label>Classification Category</label>
-                <select id="bsiType">
-                    <option value="LCBI1">LCBI 1: Recognized Pathogen</option>
-                    <option value="LCBI2">LCBI 2: Commensal (Adult/Pediatric)</option>
-                    <option value="LCBI3">LCBI 3: Commensal (Neonatal ≤1 yr)</option>
+            <div class="module-group">
+                <h3>Bloodstream Assessment</h3>
+                <label>Central Line in place > 2 days?</label>
+                <select id="bsiLine"><option value="no">No</option><option value="yes">Yes</option></select>
+                <label>Culture & Symptoms</label>
+                <select id="bsiLogic">
+                    <option value="none">None</option>
+                    <option value="LCBI1">Recognized Pathogen (e.g., S.aureus) in 1+ blood culture</option>
+                    <option value="LCBI2">Commensal (e.g., CoNS) in 2+ cultures + Fever/Chills (Adult)</option>
+                    <option value="LCBI3">Commensal in 2+ cultures + Apnea/Bradycardia (Infant ≤1yr)</option>
                 </select>
-                <label>Matching Cultures (Separate Occasions)</label>
-                <input type="number" id="bsiCult" value="1">
-                <label>Clinical Signs (Fever, Chills, Hypotension, OR Infant Apnea/Bradycardia)</label>
-                <select id="bsiSym"><option value="yes">Yes</option><option value="no">No</option></select>
-                <label>Central Line in place >2 days?</label>
-                <select id="bsiLine"><option value="yes">Yes</option><option value="no">No</option></select>
             </div>
 
-            <div id="utiControls" class="module-group hidden">
-                <h3>CAUTI (SUTI/ABUTI) Pathway</h3>
-                <label>Infection Type</label>
-                <select id="utiType">
-                    <option value="SUTI1A">SUTI 1a: Foley in place >2 days</option>
-                    <option value="SUTI1B">SUTI 1b: Removed <24h prior</option>
-                    <option value="SUTI2">SUTI 2: Pediatric (≤1 yr)</option>
-                    <option value="ABUTI">ABUTI: Asymptomatic Bacteremic UTI</option>
+            <div class="module-group">
+                <h3>Urinary Assessment</h3>
+                <label>Catheter Status</label>
+                <select id="utiStatus">
+                    <option value="none">No Foley</option>
+                    <option value="inPlace">Foley in place > 2 days</option>
+                    <option value="removed">Foley removed Day before or Day of event</option>
                 </select>
-                <label>Culture Growth (≥10^5 CFU/ml)</label>
-                <select id="utiCult"><option value="yes">Yes (≤2 species)</option><option value="no">No</option></select>
-                <label>Symptoms (Fever, Urgency, Suprapubic pain, etc.)</label>
-                <select id="utiSym"><option value="yes">Yes</option><option value="no">No</option></select>
+                <label>Culture/Symptoms Profile</label>
+                <select id="utiLogic">
+                    <option value="none">None</option>
+                    <option value="SUTI1">≥10^5 CFU/ml (max 2 species) + Symptoms (Fever, Pain, Urgency)</option>
+                    <option value="SUTI2">Pediatric (≤1yr): ≥10^5 CFU/ml + Fever/Apnea/Bradycardia</option>
+                    <option value="ABUTI">No symptoms, but same organism in Urine (≥10^5) AND Blood</option>
+                </select>
             </div>
 
-            <div id="ssiControls" class="module-group hidden">
-                <h3>SSI Detail Matrix</h3>
-                <label>Depth Classification</label>
-                <select id="ssiDepth">
-                    <option value="Superficial">Superficial Incisional</option>
-                    <option value="Deep">Deep Incisional</option>
-                    <option value="Organ/Space">Organ/Space</option>
-                </select>
-                <label>Procedure Surveillance Window</label>
-                <select id="ssiWin">
-                    <option value="30">30-Day Window</option>
-                    <option value="90">90-Day (Implants/Major)</option>
-                </select>
-                <label>Positive Culture / Purulence / Abscess?</label>
-                <select id="ssiEvid"><option value="yes">Yes</option><option value="no">No</option></select>
+            <div class="module-group">
+                <h3>Surgical Assessment</h3>
+                <label>Surgical Procedure performed?</label>
+                <select id="ssiDone" onchange="toggleSSI()"><option value="no">No</option><option value="yes">Yes</option></select>
+                <div id="ssiDetails" class="hidden">
+                    <label>Depth of Infection</label>
+                    <select id="ssiDepth">
+                        <option value="Superficial Incisional">Superficial Incisional (Skin/SubQ)</option>
+                        <option value="Deep Incisional">Deep Incisional (Fascia/Muscle)</option>
+                        <option value="Organ/Space">Organ/Space (Anatomical space)</option>
+                    </select>
+                    <label>Clinical Evidence</label>
+                    <select id="ssiEvidence">
+                        <option value="none">None</option>
+                        <option value="purulent">Purulent drainage</option>
+                        <option value="culture">Positive aseptic culture</option>
+                        <option value="abscess">Abscess/Infection seen on Re-op/Imaging</option>
+                        <option value="physician">Physician/Surgeon diagnosis</option>
+                    </select>
+                    <label>Days Post-Op</label>
+                    <input type="number" id="ssiDays" value="0">
+                    <label>Surveillance Window</label>
+                    <select id="ssiWin"><option value="30">30-Day</option><option value="90">90-Day (Implants)</option></select>
+                </div>
             </div>
 
-            <div id="vaeControls" class="module-group hidden">
-                <h3>VAE Decision Ladder</h3>
-                <label>1. VAC: PEEP increase ≥3 or FiO2 increase ≥0.20 for ≥2 days?</label>
-                <select id="vaeVac"><option value="no">No</option><option value="yes">Yes (VAC Met)</option></select>
-                <label>2. IVAC: VAC + Temp >38/<36 or WBC ≥12k/≤4k + New Antibiotic ≥4 days?</label>
-                <select id="vaeIvac"><option value="no">No</option><option value="yes">Yes (IVAC Met)</option></select>
-                <label>3. PVAP: IVAC + Positive respiratory culture/lab?</label>
-                <select id="vaePvap"><option value="no">No</option><option value="yes">Yes (PVAP Met)</option></select>
+            <div class="module-group">
+                <h3>Ventilator Assessment (NHSN Style)</h3>
+                <label>Ventilated for > 2 days?</label>
+                <select id="vaeVent"><option value="no">No</option><option value="yes">Yes</option></select>
+                <div class="vae-grid">
+                    <div>
+                        <label>Oxygenation Stability</label>
+                        <select id="vaeStable"><option value="no">No</option><option value="yes">≥2 days stable baseline</option></select>
+                    </div>
+                    <div>
+                        <label>Sustained Rise</label>
+                        <select id="vaeRise"><option value="no">No</option><option value="yes">Sustained rise (≥2 days)</option></select>
+                    </div>
+                </div>
+                <label>Inflammatory Signs + New Abx (≥4 days)?</label>
+                <select id="vaeIvac"><option value="no">No</option><option value="yes">Yes</option></select>
+                <label>Positive Resp Culture/Lab?</label>
+                <select id="vaePvap"><option value="no">No</option><option value="yes">Yes</option></select>
             </div>
 
-            <button id="calcBtn" onclick="calculate()">RUN AUDIT ANALYSIS</button>
+            <button id="calcBtn" onclick="calculate()">DETERMINE CLASSIFICATION</button>
             <div id="result" class="result-box"></div>
         </div>
     </div>
 
-    <div id="tab-manual" class="tab-content hidden">
+    <div id="tab-manual" class="hidden">
         <div class="card">
-            <div class="manual-item">
-                <h3>CLABSI Definitions</h3>
-                <p><strong>LCBI 3:</strong> Occurs in neonates ($\le$ 1 year). Clinical signs must include at least one of: fever, hypothermia, apnea, or bradycardia + 2 matching commensal cultures.</p>
-                
+            <div class="manual-entry">
+                <h3>CLABSI (BSI) Definitions</h3>
+                <p><strong>LCBI 1:</strong> Recognized pathogen in 1+ blood culture.</p>
+                <p><strong>LCBI 2:</strong> 2+ commensals + clinical symptoms (Fever/Chills).</p>
+                <p><strong>LCBI 3:</strong> Infant ≤ 1 year + 2 commensals + apnea/bradycardia.</p>
             </div>
-            <div class="manual-item">
-                <h3>CAUTI Nuances</h3>
-                <p><strong>ABUTI:</strong> Patient has no symptoms, but same organism is grown from urine ($\ge 10^5$) and blood.</p>
-                
+            <div class="manual-entry">
+                <h3>CAUTI (UTI) Definitions</h3>
+                <p><strong>SUTI 1a:</strong> Foley in place >2 days on DOE.</p>
+                <p><strong>SUTI 1b:</strong> Foley removed day before or day of DOE.</p>
+                <p><strong>ABUTI:</strong> No symptoms, but urine culture matches blood culture.</p>
             </div>
-        </div>
-    </div>
-
-    <div id="tab-analysis" class="tab-content hidden">
-        <div class="card">
-            <h3>Standardized Infection Ratio (SIR)</h3>
-            <p>The SIR is our primary metric. $SIR = \frac{Observed}{Predicted}$. A SIR < 1.0 indicates our IPC protocols at CLMMRH are outperforming benchmarks.</p>
-            <h3>Device Utilization (DU)</h3>
-            <p>Tracking DU ratios for ventilators and central lines helps identify wards where device dependency—and thus infection risk—is highest.</p>
+            <div class="manual-entry">
+                <h3>SSI Definitions</h3>
+                <p><strong>Superficial:</strong> Skin/SubQ only. Must occur within 30 days.</p>
+                <p><strong>Deep:</strong> Fascia/Muscle. 30/90 day window depending on procedure.</p>
+                <p><strong>Organ/Space:</strong> Deeper than muscle. Requires purulent drainage or abscess.</p>
+            </div>
+            <div class="manual-entry">
+                <h3>VAE Definitions</h3>
+                <p><strong>VAC:</strong> Respiratory deterioration (PEEP/FiO2 rise).</p>
+                <p><strong>IVAC:</strong> VAC + Temp/WBC + New Antimicrobials.</p>
+                <p><strong>PVAP:</strong> IVAC + Positive Respiratory Lab evidence.</p>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
     function showTab(tab) {
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById('tab-'+tab).classList.remove('hidden');
-        event.currentTarget.classList.add('active');
+        document.getElementById('tab-engine').classList.toggle('hidden', tab !== 'engine');
+        document.getElementById('tab-manual').classList.toggle('hidden', tab !== 'manual');
+        document.getElementById('btn-engine').classList.toggle('active', tab === 'engine');
+        document.getElementById('btn-manual').classList.toggle('active', tab === 'manual');
     }
-
-    function updateUI() {
-        const mod = document.getElementById('module').value;
-        document.querySelectorAll('.module-group').forEach(el => el.classList.add('hidden'));
-        document.getElementById(mod.toLowerCase() + 'Controls').classList.remove('hidden');
-    }
+    function toggleSSI() { document.getElementById('ssiDetails').classList.toggle('hidden', document.getElementById('ssiDone').value === 'no'); }
 
     function calculate() {
-        const mod = document.getElementById('module').value;
         const day = parseInt(document.getElementById('hospDay').value);
-        let isHai = false; let classification = "NEGATIVE";
+        let res = [];
 
-        if (day <= 2 && mod !== 'SSI') {
-            classification = "POA (Present on Admission)";
-        } else {
-            if (mod === 'BSI') {
-                const line = document.getElementById('bsiLine').value === 'yes';
-                const type = document.getElementById('bsiType').value;
-                const cult = parseInt(document.getElementById('bsiCult').value);
-                const sym = document.getElementById('bsiSym').value === 'yes';
-                if (line) {
-                    if (type === 'LCBI1') { isHai = true; classification = "LCBI 1"; }
-                    else if (cult >= 2 && sym) { isHai = true; classification = type; }
-                }
-            } else if (mod === 'UTI') {
-                const cult = document.getElementById('utiCult').value === 'yes';
-                const sym = document.getElementById('utiSym').value === 'yes';
-                if (cult && sym) { isHai = true; classification = document.getElementById('utiType').value; }
-            } else if (mod === 'SSI') {
-                if (document.getElementById('ssiEvid').value === 'yes') { isHai = true; classification = "SSI (" + document.getElementById('ssiDepth').value + ")"; }
-            } else if (mod === 'VAE') {
-                const vac = document.getElementById('vaeVac').value === 'yes';
-                const ivac = document.getElementById('vaeIvac').value === 'yes';
-                const pvap = document.getElementById('vaePvap').value === 'yes';
-                if (pvap && ivac && vac) { isHai = true; classification = "PVAP"; }
-                else if (ivac && vac) { isHai = true; classification = "IVAC"; }
-                else if (vac) { isHai = true; classification = "VAC"; }
-            }
+        // BSI
+        if (document.getElementById('bsiLine').value === 'yes' && document.getElementById('bsiLogic').value !== 'none') {
+            if (day > 2) res.push({ name: document.getElementById('bsiLogic').value + " (CLABSI)", why: "Central line duration >2 days + Positive culture path." });
+            else res.push({ name: "POA - BSI", why: "Clinical elements present on Day 1 or 2 of admission." });
+        }
+
+        // UTI
+        if (document.getElementById('utiStatus').value !== 'none' && document.getElementById('utiLogic').value !== 'none') {
+            const type = document.getElementById('utiLogic').value;
+            if (day > 2) res.push({ name: type + " (CAUTI)", why: "Foley duration >2 days + Symptomatic culture criteria." });
+            else res.push({ name: "POA - UTI", why: "Clinical elements present on Day 1 or 2 of admission." });
+        }
+
+        // SSI
+        if (document.getElementById('ssiDone').value === 'yes' && document.getElementById('ssiEvidence').value !== 'none') {
+            const d = parseInt(document.getElementById('ssiDays').value);
+            const w = parseInt(document.getElementById('ssiWin').value);
+            if (d <= w) res.push({ name: "SSI (" + document.getElementById('ssiDepth').value + ")", why: "Clinical evidence found within the post-op surveillance window." });
+        }
+
+        // VAE
+        if (document.getElementById('vaeVent').value === 'yes' && document.getElementById('vaeStable').value === 'yes' && document.getElementById('vaeRise').value === 'yes') {
+            let v = "VAC";
+            if (document.getElementById('vaeIvac').value === 'yes') v = "IVAC";
+            if (document.getElementById('vaePvap').value === 'yes') v = "PVAP";
+            res.push({ name: v, why: "Met NHSN 2-day stability followed by 2-day sustained respiratory rise." });
         }
 
         const box = document.getElementById('result');
         box.style.display = "block";
-        box.className = "result-box " + (isHai ? "hai-pos" : "hai-neg");
-        box.innerHTML = `<h3>ANALYSIS RESULT</h3><strong>Status:</strong> ${isHai ? 'HAI POSITIVE' : 'NEGATIVE'}<br><strong>Specific Classification:</strong> ${classification}`;
+        if (res.length > 0) {
+            box.className = "result-box hai-pos";
+            box.innerHTML = `<h3>DETECTION SUMMARY</h3>` + res.map(r => `<div><strong>${r.name}</strong><br><small>${r.why}</small></div><br>`).join('');
+        } else {
+            box.className = "result-box hai-neg";
+            box.innerHTML = `<h3>NEGATIVE FOR HAI</h3>No criteria met for surveillance classification.`;
+        }
     }
 </script>
 </body>
