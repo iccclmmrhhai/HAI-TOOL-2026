@@ -3,218 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLMMRH HAI Deciphering Suite</title>
+    <title>CLMMRH HAI Master Suite</title>
     <style>
-        :root { --clmmrh-green: #008542; --clmmrh-blue: #0038a8; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 10px; color: #333; }
-        .header { background: var(--clmmrh-blue); color: white; padding: 15px; border-radius: 10px 10px 0 0; text-align: center; border-bottom: 5px solid var(--clmmrh-green); }
-        .card { background: white; padding: 20px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .tabs { display: flex; background: #ddd; padding: 5px; gap: 5px; border-radius: 5px; margin-bottom: 10px; }
-        .tab-btn { flex: 1; padding: 10px; border: none; background: #ccc; cursor: pointer; font-weight: bold; border-radius: 5px; }
+        :root { --clmmrh-green: #008542; --clmmrh-blue: #0038a8; --bg: #f4f7f9; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; color: #2d3748; }
+        .header { background: var(--clmmrh-blue); color: white; padding: 25px; border-radius: 12px 12px 0 0; text-align: center; border-bottom: 6px solid var(--clmmrh-green); }
+        .logo { font-size: 2rem; font-weight: 800; letter-spacing: 1px; margin-bottom: 5px; }
+        .card { background: white; padding: 25px; border-radius: 0 0 12px 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .tabs { display: flex; background: #e2e8f0; padding: 6px; gap: 6px; border-radius: 10px; margin-bottom: 15px; overflow-x: auto; }
+        .tab-btn { flex: 1; padding: 12px; border: none; background: #cbd5e0; cursor: pointer; font-weight: 700; border-radius: 8px; transition: 0.2s; white-space: nowrap; }
         .tab-btn.active { background: var(--clmmrh-blue); color: white; }
-        .module-group { border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; background: #fafafa; margin-top: 10px; }
-        label { display: block; font-weight: 600; margin-top: 12px; font-size: 0.85rem; }
-        select, input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px; box-sizing: border-box; font-size: 1rem; }
-        button { width: 100%; padding: 15px; background: var(--clmmrh-green); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 20px; font-size: 1rem; }
-        .result-box { margin-top: 20px; padding: 20px; border-radius: 8px; display: none; border-left: 8px solid; line-height: 1.6; }
-        .hai-pos { background: #fff5f5; border-color: #c53030; color: #9b2c2c; }
+        .module-group { border: 2px solid #edf2f7; padding: 20px; border-radius: 12px; background: #f8fafc; margin-top: 15px; }
+        label { display: block; font-weight: 700; margin-top: 18px; font-size: 0.9rem; color: #4a5568; }
+        select, input { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 10px; margin-top: 8px; box-sizing: border-box; font-size: 1rem; }
+        button#calcBtn { width: 100%; padding: 20px; background: var(--clmmrh-green); color: white; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; margin-top: 30px; font-size: 1.2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .result-box { margin-top: 25px; padding: 25px; border-radius: 12px; display: none; border-left: 10px solid; animation: fadeIn 0.4s ease; }
+        .hai-pos { background: #fff5f5; border-color: #e53e3e; color: #9b2c2c; }
         .hai-neg { background: #f0fff4; border-color: #38a169; color: #22543d; }
         .hidden { display: none; }
-        .summary-badge { display: inline-block; padding: 4px 8px; border-radius: 4px; background: #eee; font-size: 0.8rem; margin-top: 5px; }
+        h3 { color: var(--clmmrh-blue); margin: 0 0 10px 0; border-bottom: 2px solid #edf2f7; padding-bottom: 10px; }
+        .manual-item { margin-bottom: 25px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <h2 style="margin:0">CLMMRH IPC</h2>
-        <p style="margin:0; font-size: 0.8rem;">Advanced HAI Classification Tool (NHSN 2026)</p>
+        <div class="logo">CLMMRH</div>
+        <div style="font-weight: 600; font-size: 0.9rem; margin-top: 5px;">Infection Prevention & Control Committee</div>
+        <div style="font-size: 0.75rem; letter-spacing: 1.5px; margin-top: 10px; background: rgba(255,255,255,0.2); display: inline-block; padding: 3px 10px; border-radius: 5px;">OFFICIAL DECIPHERING SUITE</div>
     </div>
 
     <div class="tabs">
-        <button class="tab-btn active" id="btn-engine" onclick="showTab('engine')">Decipher</button>
-        <button class="tab-btn" id="btn-logs" onclick="showTab('logs')">Case Log</button>
+        <button class="tab-btn active" onclick="showTab('engine')">CALCULATOR</button>
+        <button class="tab-btn" onclick="showTab('manual')">MANUAL</button>
+        <button class="tab-btn" onclick="showTab('analysis')">ANALYSIS</button>
     </div>
 
-    <div id="tab-engine">
+    <div id="tab-engine" class="tab-content">
         <div class="card">
-            <label>Patient Name / Bed Number</label>
-            <input type="text" id="ptId" placeholder="e.g. Ward 3 - Bed 12">
-
-            <label>Infection Module</label>
+            <label>Module Selection</label>
             <select id="module" onchange="updateUI()">
-                <option value="BSI">CLABSI (Bloodstream)</option>
-                <option value="UTI">CAUTI (Urinary Tract)</option>
+                <option value="BSI">BSI (CLABSI)</option>
+                <option value="UTI">UTI (CAUTI)</option>
                 <option value="SSI">SSI (Surgical Site)</option>
                 <option value="VAE">VAE (Ventilator)</option>
             </select>
 
-            <label>Hospital Day of Event (Day 1 = Admission)</label>
+            <label>Hospital Day (Day 1 = Admission)</label>
             <input type="number" id="hospDay" value="3">
 
             <div id="bsiControls" class="module-group">
-                <label>Organism Type</label>
+                <h3>CLABSI (LCBI) Pathway</h3>
+                <label>Classification Category</label>
                 <select id="bsiType">
-                    <option value="pathogen">Recognized Pathogen (1+ culture)</option>
-                    <option value="commensal">Common Commensal (2+ matching cultures)</option>
+                    <option value="LCBI1">LCBI 1: Recognized Pathogen</option>
+                    <option value="LCBI2">LCBI 2: Commensal (Adult/Pediatric)</option>
+                    <option value="LCBI3">LCBI 3: Commensal (Neonatal ≤1 yr)</option>
                 </select>
-                <label>Symptoms (Fever, Chills, Hypotension)</label>
+                <label>Matching Cultures (Separate Occasions)</label>
+                <input type="number" id="bsiCult" value="1">
+                <label>Clinical Signs (Fever, Chills, Hypotension, OR Infant Apnea/Bradycardia)</label>
                 <select id="bsiSym"><option value="yes">Yes</option><option value="no">No</option></select>
-                <label>Central Line in place > 2 days?</label>
+                <label>Central Line in place >2 days?</label>
                 <select id="bsiLine"><option value="yes">Yes</option><option value="no">No</option></select>
             </div>
 
             <div id="utiControls" class="module-group hidden">
-                <label>Urine Culture</label>
-                <select id="utiCult">
-                    <option value="pos">Positive (≥10^5 CFU/ml with ≤2 species)</option>
-                    <option value="neg">Negative or Low Growth</option>
+                <h3>CAUTI (SUTI/ABUTI) Pathway</h3>
+                <label>Infection Type</label>
+                <select id="utiType">
+                    <option value="SUTI1A">SUTI 1a: Foley in place >2 days</option>
+                    <option value="SUTI1B">SUTI 1b: Removed <24h prior</option>
+                    <option value="SUTI2">SUTI 2: Pediatric (≤1 yr)</option>
+                    <option value="ABUTI">ABUTI: Asymptomatic Bacteremic UTI</option>
                 </select>
-                <label>Symptom (Fever >38C, Suprapubic pain, CVA tenderness)</label>
+                <label>Culture Growth (≥10^5 CFU/ml)</label>
+                <select id="utiCult"><option value="yes">Yes (≤2 species)</option><option value="no">No</option></select>
+                <label>Symptoms (Fever, Urgency, Suprapubic pain, etc.)</label>
                 <select id="utiSym"><option value="yes">Yes</option><option value="no">No</option></select>
-                <label>Foley in place > 2 days?</label>
-                <select id="utiLine"><option value="yes">Yes</option><option value="no">No</option></select>
             </div>
 
             <div id="ssiControls" class="module-group hidden">
-                <label>Anatomical Depth</label>
+                <h3>SSI Detail Matrix</h3>
+                <label>Depth Classification</label>
                 <select id="ssiDepth">
-                    <option value="Superficial Incisional">Superficial Incisional</option>
-                    <option value="Deep Incisional">Deep Incisional</option>
+                    <option value="Superficial">Superficial Incisional</option>
+                    <option value="Deep">Deep Incisional</option>
                     <option value="Organ/Space">Organ/Space</option>
                 </select>
-                <label>Procedure Type</label>
-                <select id="ssiWindow">
-                    <option value="30">General Procedure (30-day window)</option>
-                    <option value="90">Implant/Major Procedure (90-day window)</option>
+                <label>Procedure Surveillance Window</label>
+                <select id="ssiWin">
+                    <option value="30">30-Day Window</option>
+                    <option value="90">90-Day (Implants/Major)</option>
                 </select>
-                <label>Days Since Procedure</label>
-                <input type="number" id="ssiDays" value="10">
+                <label>Positive Culture / Purulence / Abscess?</label>
+                <select id="ssiEvid"><option value="yes">Yes</option><option value="no">No</option></select>
             </div>
 
             <div id="vaeControls" class="module-group hidden">
-                <label>Oxygenation Deterioration (VAC)</label>
-                <select id="vaeVac">
-                    <option value="yes">Yes (FiO2 ≥0.20 or PEEP ≥3 for 2+ days)</option>
-                    <option value="no">No</option>
-                </select>
-                <label>Infection Signs (Temp/WBC) + New Antibiotics?</label>
-                <select id="vaeIvac"><option value="yes">Yes (IVAC Criteria)</option><option value="no">No</option></select>
-                <label>Positive Respiratory Lab/Culture?</label>
-                <select id="vaePvap"><option value="yes">Yes (PVAP Criteria)</option><option value="no">No</option></select>
+                <h3>VAE Decision Ladder</h3>
+                <label>1. VAC: PEEP increase ≥3 or FiO2 increase ≥0.20 for ≥2 days?</label>
+                <select id="vaeVac"><option value="no">No</option><option value="yes">Yes (VAC Met)</option></select>
+                <label>2. IVAC: VAC + Temp >38/<36 or WBC ≥12k/≤4k + New Antibiotic ≥4 days?</label>
+                <select id="vaeIvac"><option value="no">No</option><option value="yes">Yes (IVAC Met)</option></select>
+                <label>3. PVAP: IVAC + Positive respiratory culture/lab?</label>
+                <select id="vaePvap"><option value="no">No</option><option value="yes">Yes (PVAP Met)</option></select>
             </div>
 
-            <button onclick="calculate()">Analyze HAI Status</button>
-
+            <button id="calcBtn" onclick="calculate()">RUN AUDIT ANALYSIS</button>
             <div id="result" class="result-box"></div>
         </div>
     </div>
 
-    <div id="tab-logs" class="hidden">
+    <div id="tab-manual" class="tab-content hidden">
         <div class="card">
-            <h3>Recent Case History</h3>
-            <div id="logContent"></div>
-            <button onclick="exportData()" style="background:#555">Export to Excel (CSV)</button>
+            <div class="manual-item">
+                <h3>CLABSI Definitions</h3>
+                <p><strong>LCBI 3:</strong> Occurs in neonates ($\le$ 1 year). Clinical signs must include at least one of: fever, hypothermia, apnea, or bradycardia + 2 matching commensal cultures.</p>
+                
+            </div>
+            <div class="manual-item">
+                <h3>CAUTI Nuances</h3>
+                <p><strong>ABUTI:</strong> Patient has no symptoms, but same organism is grown from urine ($\ge 10^5$) and blood.</p>
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="tab-analysis" class="tab-content hidden">
+        <div class="card">
+            <h3>Standardized Infection Ratio (SIR)</h3>
+            <p>The SIR is our primary metric. $SIR = \frac{Observed}{Predicted}$. A SIR < 1.0 indicates our IPC protocols at CLMMRH are outperforming benchmarks.</p>
+            <h3>Device Utilization (DU)</h3>
+            <p>Tracking DU ratios for ventilators and central lines helps identify wards where device dependency—and thus infection risk—is highest.</p>
         </div>
     </div>
 </div>
 
 <script>
     function showTab(tab) {
-        document.getElementById('tab-engine').classList.toggle('hidden', tab !== 'engine');
-        document.getElementById('tab-logs').classList.toggle('hidden', tab !== 'logs');
-        document.getElementById('btn-engine').classList.toggle('active', tab === 'engine');
-        document.getElementById('btn-logs').classList.toggle('active', tab === 'logs');
-        if(tab === 'logs') renderLogs();
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab-'+tab).classList.remove('hidden');
+        event.currentTarget.classList.add('active');
     }
 
     function updateUI() {
         const mod = document.getElementById('module').value;
-        document.getElementById('bsiControls').classList.toggle('hidden', mod !== 'BSI');
-        document.getElementById('utiControls').classList.toggle('hidden', mod !== 'UTI');
-        document.getElementById('ssiControls').classList.toggle('hidden', mod !== 'SSI');
-        document.getElementById('vaeControls').classList.toggle('hidden', mod !== 'VAE');
+        document.querySelectorAll('.module-group').forEach(el => el.classList.add('hidden'));
+        document.getElementById(mod.toLowerCase() + 'Controls').classList.remove('hidden');
     }
 
     function calculate() {
         const mod = document.getElementById('module').value;
         const day = parseInt(document.getElementById('hospDay').value);
-        let isHai = false;
-        let classification = "Negative";
-        let rationale = "";
+        let isHai = false; let classification = "NEGATIVE";
 
-        // 1. Check for POA (Present on Admission)
         if (day <= 2 && mod !== 'SSI') {
             classification = "POA (Present on Admission)";
-            rationale = "Event elements occurred on Hospital Day 1 or 2.";
         } else {
-            // 2. Module Specific Logic
             if (mod === 'BSI') {
-                const type = document.getElementById('bsiType').value;
-                const sym = document.getElementById('bsiSym').value === 'yes';
                 const line = document.getElementById('bsiLine').value === 'yes';
+                const type = document.getElementById('bsiType').value;
+                const cult = parseInt(document.getElementById('bsiCult').value);
+                const sym = document.getElementById('bsiSym').value === 'yes';
                 if (line) {
-                    if (type === 'pathogen') { isHai = true; classification = "LCBI 1 (CLABSI)"; }
-                    else if (type === 'commensal' && sym) { isHai = true; classification = "LCBI 2 (CLABSI)"; }
+                    if (type === 'LCBI1') { isHai = true; classification = "LCBI 1"; }
+                    else if (cult >= 2 && sym) { isHai = true; classification = type; }
                 }
-            } 
-            else if (mod === 'UTI') {
-                const cult = document.getElementById('utiCult').value === 'pos';
+            } else if (mod === 'UTI') {
+                const cult = document.getElementById('utiCult').value === 'yes';
                 const sym = document.getElementById('utiSym').value === 'yes';
-                const line = document.getElementById('utiLine').value === 'yes';
-                if (cult && sym && line) { isHai = true; classification = "SUTI 1 (CAUTI)"; }
-            }
-            else if (mod === 'SSI') {
-                const days = parseInt(document.getElementById('ssiDays').value);
-                const win = parseInt(document.getElementById('ssiWindow').value);
-                const depth = document.getElementById('ssiDepth').value;
-                if (days <= win) { isHai = true; classification = "SSI (" + depth + ")"; }
-            }
-            else if (mod === 'VAE') {
+                if (cult && sym) { isHai = true; classification = document.getElementById('utiType').value; }
+            } else if (mod === 'SSI') {
+                if (document.getElementById('ssiEvid').value === 'yes') { isHai = true; classification = "SSI (" + document.getElementById('ssiDepth').value + ")"; }
+            } else if (mod === 'VAE') {
                 const vac = document.getElementById('vaeVac').value === 'yes';
                 const ivac = document.getElementById('vaeIvac').value === 'yes';
                 const pvap = document.getElementById('vaePvap').value === 'yes';
-                if (vac && ivac && pvap) { isHai = true; classification = "PVAP (Ventilator)"; }
-                else if (vac && ivac) { isHai = true; classification = "IVAC (Ventilator)"; }
-                else if (vac) { isHai = true; classification = "VAC (Ventilator)"; }
+                if (pvap && ivac && vac) { isHai = true; classification = "PVAP"; }
+                else if (ivac && vac) { isHai = true; classification = "IVAC"; }
+                else if (vac) { isHai = true; classification = "VAC"; }
             }
         }
 
         const box = document.getElementById('result');
         box.style.display = "block";
         box.className = "result-box " + (isHai ? "hai-pos" : "hai-neg");
-        box.innerHTML = `<strong>Final Determination:</strong> ${isHai ? 'HAI POSITIVE' : 'HAI NEGATIVE'}<br>
-                         <strong>Classification:</strong> ${classification}<br>
-                         <span style="font-size:0.85rem">${rationale}</span>`;
-        
-        saveLog(classification, isHai ? 'Positive' : 'Negative');
-    }
-
-    function saveLog(cls, res) {
-        let logs = JSON.parse(localStorage.getItem('clmmrh_audit') || '[]');
-        const pt = document.getElementById('ptId').value || "Unknown Patient";
-        logs.unshift({ pt, cls, res, date: new Date().toLocaleDateString() });
-        localStorage.setItem('clmmrh_audit', JSON.stringify(logs.slice(0, 10)));
-    }
-
-    function renderLogs() {
-        let logs = JSON.parse(localStorage.getItem('clmmrh_audit') || '[]');
-        document.getElementById('logContent').innerHTML = logs.map(l => 
-            `<div style="border-bottom:1px solid #eee; padding:10px 0;">
-                <strong>${l.pt}</strong> - ${l.cls} (${l.res}) <br><small>${l.date}</small>
-            </div>`).join('') || "No cases logged yet.";
-    }
-
-    function exportData() {
-        let logs = JSON.parse(localStorage.getItem('clmmrh_audit') || '[]');
-        let csv = "Patient,Classification,Result,Date\n";
-        logs.forEach(l => { csv += `${l.pt},${l.cls},${l.res},${l.date}\n` });
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.setAttribute('href', url);
-        a.setAttribute('download', 'CLMMRH_Report.csv');
-        a.click();
+        box.innerHTML = `<h3>ANALYSIS RESULT</h3><strong>Status:</strong> ${isHai ? 'HAI POSITIVE' : 'NEGATIVE'}<br><strong>Specific Classification:</strong> ${classification}`;
     }
 </script>
 </body>
